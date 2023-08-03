@@ -15,6 +15,10 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent
     {
         Debug.LogError("Interact method not implemented");
     }
+    public virtual void InteractAlternate(Player player)
+    {
+        Debug.LogError("InteractAlternate method not implemented");
+    }
 
     public Transform GetKitchenObjectFollowTransform()
     {

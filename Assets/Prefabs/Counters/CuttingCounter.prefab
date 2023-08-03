@@ -360,3 +360,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counterTopPoint: {fileID: 3648940307757849615}
+  cutKitchenObjectSO: {fileID: 11400000, guid: eb853f08f49342b4ab8b2608a07fc5b4, type: 2}
