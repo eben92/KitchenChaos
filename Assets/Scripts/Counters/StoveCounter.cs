@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,12 @@ using UnityEngine;
 public class StoveCounter : BaseCounter
 {
 
-    private enum State
+    public event EventHandler<OnStateChangedEventArgs> OnStateChanged;
+    public class OnStateChangedEventArgs : EventArgs
+    {
+        public State state;
+    }
+    public enum State
     {
         Idle,
         Frying,
@@ -53,6 +59,8 @@ public class StoveCounter : BaseCounter
                         burningRecipeSO = GetBurningRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
                         state = State.Fried;
                         burningTimer = 0f;
+
+                        OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
                     }
 
                     break;
@@ -70,6 +78,8 @@ public class StoveCounter : BaseCounter
 
 
                         state = State.Burned;
+
+                        OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
                     }
 
 
@@ -101,6 +111,8 @@ public class StoveCounter : BaseCounter
 
                     state = State.Frying;
                     fryingTimer = 0f;
+
+                    OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
                 }
 
             }
@@ -123,6 +135,8 @@ public class StoveCounter : BaseCounter
                 // player is not carrying anything
                 GetKitchenObject().SetKitchenObjectParent(player);
                 state = State.Idle;
+
+                OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
             }
         }
     }
