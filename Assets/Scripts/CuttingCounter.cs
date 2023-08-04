@@ -12,6 +12,8 @@ public class CuttingCounter : BaseCounter
         public float progressNormalized;
     }
 
+    public event EventHandler OnCut;
+
     [SerializeField] private CuttingRecipeSO[] cuttingRecipeSOArray;
 
     private int numberOfTimesPlayerHitInteractAlternate = 0;
@@ -67,8 +69,9 @@ public class CuttingCounter : BaseCounter
 
             // theres a kitchen object here & it can be cut
             numberOfTimesPlayerHitInteractAlternate++;
-            Debug.Log("cuttingProgresss: " + numberOfTimesPlayerHitInteractAlternate);
 
+
+            OnCut.Invoke(this, EventArgs.Empty);
             CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
 
 
